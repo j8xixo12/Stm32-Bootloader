@@ -34,6 +34,7 @@ void xmodem_receive(void)
   x_first_packet_received = false;
   xmodem_packet_number = 1u;
   xmodem_actual_flash_address = FLASH_APP_START_ADDRESS;
+  xmodem_status packet_status = X_ERROR;
 
   /* Loop until there isn't any error (or until we jump to the user application). */
   while (X_OK == status)
@@ -62,7 +63,6 @@ void xmodem_receive(void)
     /* The header can be: SOH, STX, EOT and CAN. */
     switch(header)
     {
-      xmodem_status packet_status = X_ERROR;
       /* 128 or 1024 bytes of data. */
       case X_SOH:
       case X_STX:
